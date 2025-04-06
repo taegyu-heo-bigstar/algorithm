@@ -2,20 +2,32 @@ packeage sort;
 
 public class example_case{
 
-    public class Point {
+    class Point {
         public final double x;
         public final double y;
+        public double distance;
 
         public Point(double x, double y) {
             this.x = x;
             this.y = y;
+            this.distance = 0.0;
         }
 
-        public double distanceTo(Point other) {
+        public void distanceTo(Point other) {
             double dx = this.x - other.x;
             double dy = this.y - other.y;
             
-            return Math.sqrt(dx * dx + dy * dy);
+            this.distance = Math.sqrt(dx * dx + dy * dy);
+        }
+    }
+
+    void show(Point[] point_arr, int k){
+        for(int i = 0; i < k; i++){
+            System.out.println(
+                k + ": " +
+                "(" + point_arr[i].x + ", " point_arr[i].y + ")   " +
+                "거리 = " + point_arr[i].distance
+            )
         }
     }
 
@@ -53,20 +65,17 @@ public class example_case{
         catch (IOException e) { System.out.println(e); return; }
 
         //calculate distance origin from other Point
-        double[] dis_arr = new double[n];
         for (int i = 0; i<n; i++){
-            dis_arr[i] = origin.distanceTo(point_arr[i])
+            point_arr[i].distanceTo(origin)
         }
 
         long sorting_start = System.currentTimeMillis();
-        sort(dia_arr);
+        sort(dis_arr);
         long sorting_end = System.currentTimeMillis();
 
         System.out.print("k = " + {k} + "일 때의 실행시간 = " + {sorting_end - sorting_start});
+        show(point_arr, k);
 
-
-        
         if (sc != null) sc.close();
-        
     }
 }
