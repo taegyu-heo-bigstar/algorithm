@@ -56,9 +56,13 @@ public class example_case{
         double[] dis_arr = new double[n];
         for (int i = 0; i<n; i++){
             dis_arr[i] = origin.distanceTo(point_arr[i])
-        }    
+        }
 
-        System.out.print("k = " + {k} + "일 때의 실행시간 = ");
+        long sorting_start = System.currentTimeMillis();
+        sort(dia_arr);
+        long sorting_end = System.currentTimeMillis();
+
+        System.out.print("k = " + {k} + "일 때의 실행시간 = " + {sorting_end - sorting_start});
 
 
         
