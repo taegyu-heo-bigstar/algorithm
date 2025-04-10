@@ -1,17 +1,3 @@
-package linear_sort;
-
-/*
-    * selection sort
-    * 
-    * feature
-    * - stable
-    * - Data state doesn't affect execution time.
-    * - use small memory
-    * 
-    * algorithm
-    * - Move an index from a current index to a last index and find minimum value
-    * - Swap the minimum value with the current value after traversing to the last index
-*/
 public class SelectionSort extends AbstractSort
     {
         public static void sort(Comparable[] a)
