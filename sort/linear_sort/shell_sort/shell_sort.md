@@ -1,5 +1,5 @@
 shell sort
-==============
+===========
 
 # feature
 1. similar to insertion sort
