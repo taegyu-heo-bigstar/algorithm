@@ -11,11 +11,11 @@ shell sort
 7. if h_i is small(last step), total array is partially sorted.
 
 ### algorithm
-set h-sequence start from 1.
-find the largest h-sequence value not greater than the array length.
-iterate h-sequence in revcerse order and preform insertion sort on elements spaced h_u apart
-remember. h_1 shell sort is same to insertion sort.
-generally used h-sequence making algorithm is "h_i = 3 * hi-1 + 1"
+set h-sequence start from 1.<br/>
+find the largest h-sequence value not greater than the array length.<br/>
+iterate h-sequence in revcerse order and preform insertion sort on elements spaced h_u apart<br/>
+remember. h_1 shell sort is same to insertion sort.<br/>
+generally used h-sequence making algorithm is "h_i = 3 * hi-1 + 1"<br/>
 
 ### pseudo code
     n = array.length
