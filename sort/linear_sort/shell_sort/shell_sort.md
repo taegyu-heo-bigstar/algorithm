@@ -13,11 +13,13 @@ shell sort
 <br/>
    
 ### algorithm
-set h-sequence start from 1.<br/>
-find the largest h-sequence value not greater than the array length.<br/>
-iterate h-sequence in revcerse order and perform insertion sort on elements spaced h<sub>i</sub> apart<br/>
-remember. h<sub>i</sub> shell sort is same to insertion sort.<br/>
-generally used h-sequence making algorithm is "h<sub>i</sub> = 3 * h<sub>i-1</sub> + 1"<br/>
+"""
+set h-sequence start from 1.
+find the largest h-sequence value not greater than the array length.
+iterate h-sequence in revcerse order and perform insertion sort on elements spaced h<sub>i</sub> apart
+remember. h<sub>i</sub> shell sort is same to insertion sort.
+generally used h-sequence making algorithm is "h<sub>i</sub> = 3 * h<sub>i-1</sub> + 1"
+"""
 ---
 <br/>
 
