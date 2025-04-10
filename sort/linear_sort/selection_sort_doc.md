@@ -11,8 +11,7 @@ Move an index from a current index to a last index and find minimum value.
 Swap the minimum value index with the current value index after traversing to the last index.
 
 ### pseudo code
-    
-n = array.length
+    n = array.length
 int i, j, minimum_value_of_index    //(0 <= i, j <= n - 1)
     
 loop i from 0 to n - 1
@@ -25,5 +24,4 @@ loop i from 0 to n - 1
     }
     swap(array, i, minimum_value_of_index)    //swap array's index i and minimum_value_or_index
 }
-    
             
