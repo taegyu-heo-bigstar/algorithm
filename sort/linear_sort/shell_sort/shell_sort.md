@@ -10,6 +10,7 @@ shell sort
 6. if h_i is big(start step), short array sorting
 7. if h_i is small(last step), total array is partially sorted.
 ---
+<br/>
    
 ### algorithm
 set h-sequence start from 1.<br/>
@@ -18,6 +19,7 @@ iterate h-sequence in revcerse order and perform insertion sort on elements spac
 remember. h_1 shell sort is same to insertion sort.<br/>
 generally used h-sequence making algorithm is "h_i = 3 * h_i-1 + 1"<br/>
 ---
+<br/>
 
 ### pseudo code
     n = array.length
