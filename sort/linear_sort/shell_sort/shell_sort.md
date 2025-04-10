@@ -1,6 +1,7 @@
 shell sort
 ==============
 
+<br/>
 ### feature
 1. similar to insertion sort
 2. insertion sort compare current index and current index minus 1
@@ -9,7 +10,8 @@ shell sort
 5. So, sorting efficiency depends on the h-sequence's recursive formula
 6. if h_i is big(start step), short array sorting
 7. if h_i is small(last step), total array is partially sorted.
-
+   
+<br/>
 ### algorithm
 set h-sequence start from 1.<br/>
 find the largest h-sequence value not greater than the array length.<br/>
@@ -17,6 +19,7 @@ iterate h-sequence in revcerse order and perform insertion sort on elements spac
 remember. h_1 shell sort is same to insertion sort.<br/>
 generally used h-sequence making algorithm is "h_i = 3 * h_i-1 + 1"<br/>
 
+<br/>
 ### pseudo code
     n = array.length
     int i, j, minimum_value_of_index    //(0 <= i, j <= n - 1)
