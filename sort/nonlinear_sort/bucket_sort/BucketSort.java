@@ -56,10 +56,6 @@ public class BucketSort{
         }
     }
 
-    public static void sort(double[] arr) {
-
-    }
-
     public static void my_sort(int[] arr){
         //choose a sorting algorithm
         return;
