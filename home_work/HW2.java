@@ -41,7 +41,7 @@ public class HW2
             if (key.equals(x.key)) // 검색 키를 가진 노드가 반환된 경우
                 return x.value;
             else // 검색 키를 가진 노드가 없는 경우
-            return null;
+                return null;
         }
 
         public void put(K key, V val) {
@@ -233,8 +233,32 @@ public class HW2
         }
     }
 
-    public void similarityCheck(BST bst_A, BST bst_B){
-        
+    class cheker{
+        private int shingle = 0;
+        private double similarity = 100.0;
+
+        private static void show(String f_A_name, String f_B_name){
+            System.out.println("두 파일에서 공통된 shingle의 수 = " + shingle);
+            System.out.println(f_A_name + "과" + f_B_name + "의 유사도 = " + similarity);
+        }
+
+        public static void run(BST bst_A, BST bst_B, String f_A_name, String f_B_name){
+            ArrayList<String> keys = bst_A.keys();
+            if (keys == null) {
+                if (bst.keys() == null){
+                    show(f_A_name, f_B_name);
+                }
+                else{
+                    similarity = 0.0;
+                    show(f_A_name, f_B_name);
+                }
+            }
+
+            String key;
+            for (key : keys){
+
+            }
+        }
     }
 
     public static void main(string args[]){
