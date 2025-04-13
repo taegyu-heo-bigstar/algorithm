@@ -215,12 +215,15 @@ public class HW2
 
         sc.close();
 
+        BST bst = new BST();
+        Node node;
+        String key;
+
         try {
             BufferedReader br = new BufferedReader(new FileReader(fname));
             String line;
             List<String> tokens = new ArrayList<>();
 
-            // 파일 전체 토큰화
             while ((line = br.readLine()) != null) {
                 StringTokenizer st = new StringTokenizer(line, " \t\n=;,<>()");
 
@@ -230,10 +233,10 @@ public class HW2
             }
             br.close();
 
-            // 5개씩 슬라이딩 윈도우
             for (int i = 0; i <= tokens.size() - 5; i++) {
                 List<String> window = tokens.subList(i, i + 5);
-                System.out.println(window);
+                key = String.join(" ", window);
+                bst.put
             }
 
         } catch (IOException e) {
