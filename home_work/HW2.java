@@ -235,7 +235,7 @@ public class HW2
 
     class cheker{
         private int shingle = 0;
-        private double similarity = 100.0;
+        private double similarity = 0.0;
 
         private static void show(String f_A_name, String f_B_name){
             System.out.println("두 파일에서 공통된 shingle의 수 = " + shingle);
@@ -245,19 +245,33 @@ public class HW2
         public static void run(BST bst_A, BST bst_B, String f_A_name, String f_B_name){
             ArrayList<String> keys = bst_A.keys();
             if (keys == null) {
-                if (bst.keys() == null){
+                if (bst_B.keys() == null){
+                    similarity = 100.0;
                     show(f_A_name, f_B_name);
                 }
                 else{
-                    similarity = 0.0;
                     show(f_A_name, f_B_name);
                 }
             }
+            else if(bst_B.keys() == null){
+                show(f_A_name, f_B_name);
+            }
 
             String key;
+            int val_a;
+            int val_b;
             for (key : keys){
+                val_a = bst_A.get(key);
+                val_b = bst_B.get(key);
 
+                if (val_a == null || val_b == null)
+                    continue;
+
+                similarity = (Math.min(val_a, val_B) / Math.max(val_a, val_b);)
             }
+            similarity /= keys.size();
+
+            show(f_A_name, f_B_name);
         }
     }
 
