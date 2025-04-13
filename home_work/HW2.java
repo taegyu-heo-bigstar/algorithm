@@ -11,8 +11,9 @@ public class HW2
         }
 
         public int getAux(){ return aux; }
-        public void setAux(int value) { aux = value; }}
+        public void setAux(int value) { aux = value; }
     }
+
 
     class BST<K extends Comparable<K>, V> {
         protected Node<K,V> root;
@@ -202,3 +203,41 @@ public class HW2
         
         public Iterable<K> keys(K lo, K hi) { … }
     }
+
+    public static void main(string args[]){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("입력 파일 A 이름? ");
+        String f_A_name = sc.nextLine();
+
+        System.out.println("입력 파일 A 이름? ");
+        String f_A_name = sc.nextLine();
+
+        sc.close();
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(fname));
+            String line;
+            List<String> tokens = new ArrayList<>();
+
+            // 파일 전체 토큰화
+            while ((line = br.readLine()) != null) {
+                StringTokenizer st = new StringTokenizer(line, " \t\n=;,<>()");
+
+                while (st.hasMoreTokens()) {
+                    tokens.add(st.nextToken());
+                }
+            }
+            br.close();
+
+            // 5개씩 슬라이딩 윈도우
+            for (int i = 0; i <= tokens.size() - 5; i++) {
+                List<String> window = tokens.subList(i, i + 5);
+                System.out.println(window);
+            }
+
+        } catch (IOException e) {
+            System.out.println("파일을 읽을 수 없습니다: " + e);
+        }
+    }
+}
