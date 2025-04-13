@@ -14,7 +14,6 @@ public class HW2
         public void setAux(int value) { aux = value; }
     }
 
-
     class BST<K extends Comparable<K>, V> {
         protected Node<K,V> root;
 
@@ -204,20 +203,9 @@ public class HW2
         public Iterable<K> keys(K lo, K hi) { … }
     }
 
-    public static void main(string args[]){
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("입력 파일 A 이름? ");
-        String f_A_name = sc.nextLine();
-
-        System.out.println("입력 파일 A 이름? ");
-        String f_A_name = sc.nextLine();
-
-        sc.close();
-
-        BST bst = new BST();
-        Node node;
-        String key;
+    public void readFile_and_makeBST(BST bst, String fname){
+        private String key;
+        private int val;
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(fname));
@@ -236,11 +224,37 @@ public class HW2
             for (int i = 0; i <= tokens.size() - 5; i++) {
                 List<String> window = tokens.subList(i, i + 5);
                 key = String.join(" ", window);
-                bst.put
+                if (val = bst.get(key)) {bst.put(key, val + 1);}
+                else {bst.put(key, 1)}
             }
 
         } catch (IOException e) {
             System.out.println("파일을 읽을 수 없습니다: " + e);
         }
+    }
+
+    public void similarityCheck(BST bst_A, BST bst_B){
+        
+    }
+
+    public static void main(string args[]){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("입력 파일 A 이름? ");
+        String f_A_name = sc.nextLine();
+
+        System.out.println("입력 파일 B 이름? ");
+        String f_B_name = sc.nextLine();
+
+        sc.close();
+
+        BST bst_A = new BST();
+        BST bst_B = new BST();
+
+        readFile_and_makeBST(bst_A, f_A_name);
+        readFile_and_makeBST(bst_B, f_B_name);
+
+        System.out.println("파일" + f_A_name + "의 Shingle의 수 = " + bst_A.size(););
+        System.out.println("파일" + f_B_name + "의 Shingle의 수 = " + bst_B.size(););
     }
 }
