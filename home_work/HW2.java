@@ -38,9 +38,9 @@ public class HW2
         public V get(K key) {
             if (root == null) return null;
             Node<K,V> x = treeSearch(key);
-            if (key.equals(x.key)) // 검색 키를 가진 노드가 반환된 경우
+            if (key.equals(x.key))
                 return x.value;
-            else // 검색 키를 가진 노드가 없는 경우
+            else
                 return null;
         }
 
@@ -48,12 +48,12 @@ public class HW2
             if (root == null) { root = new Node<K,V>(key, val); return; }
             Node<K,V> x = treeSearch(key);
             int cmp = key.compareTo(x.key);
-            if (cmp == 0) x.value = val; // 키가 존재하므로, 값을 reset
-            else { // 없는 키: 새로운 노드를 생성하여 x의 자식으로 추가Node<K,V> newNode = new Node<K,V>(key, val);
+            if (cmp == 0) x.value = val;
+            else {
                 if (cmp < 0) x.left = newNode;
                 else x.right = newNode;
                 newNode.parent = x;
-                rebalanceInsert(newNode); // Insert의 후속 조치: 다음 slide
+                rebalanceInsert(newNode);
 
             }
         }
@@ -77,25 +77,22 @@ public class HW2
             if (root == null) return;
                 Node<K,V> x, y, p;
             x = treeSearch(key);
-            // key가 없는 경우.
             if (!key.equals(x.key))
                 return;
-            // 루트이거나 자식이 두 개인 노드
             if (x == root || isTwoNode(x)) {
-                if (isLeaf(x)) // 루트가 리프
+                if (isLeaf(x))
                     { root = null; return; }
-                else if (!isTwoNode(x)) { // 루트
+                else if (!isTwoNode(x)) {
                     root = (x.right == null) ?
-                    x.left : x.right; // 자식을 루트로
+                    x.left : x.right;
                     root.parent = null;
                     return;
                 }
-                else { // 자식이 둘인 노드(루트 포함)y = min(x.right); // inorder successorx.key = y.key; // y를 x에 복사x.value = y.value; // y를 x에 복사p = y.parent;
-                    // y의 자식을 p의 자식으로(y 삭제)
-                    relink(p, y.right, y == p.left); // next page// y의 조상 노드들의 size를 감소rebalanceDelete(p, y);
+                else {
+                    relink(p, y.right, y == p.left);
                 }
             }
-            else { // 자식  1 이고, 루트 아님
+            else {
                 p = x.parent;
                 if (x.right == null)
                     relink(p, x.left, x == p.left);
@@ -116,30 +113,30 @@ public class HW2
         { return x.left != null && x.right != null; }
 
         protected void relink(Node<K,V> parent, Node<K,V> child, boolean makeLeft) {
-            if (child != null) child.parent = parent; // child를 parent의 자식으로
-            if (makeLeft) parent.left = child; // 왼쪽 자식, 또는
-            else parent.right = child; // 오른쪽 자식
+            if (child != null) child.parent = parent;
+            if (makeLeft) parent.left = child;
+            else parent.right = child;
         }
 
         protected Node<K,V> min(Node<K,V> x) { while (x.left != null) x = x.left; return x; }
         
-        public K min() { // 제일 작은 키를 반환
+        public K min() {
             if (root == null) return null;
             Node<K,V> x = root;
-            while (x.left != null) // 제일 왼쪽에 있는 노드
+            while (x.left != null)
             x = x.left;
             return x.key;
             }
 
-        public K max() { // 제일 큰 키를 반환
+        public K max() {
             if (root == null) return null;
             Node<K,V> x = root;
-            while (x.right != null) // 제일 오른쪽에 있는 노드
+            while (x.right != null)
             x = x.right;
             return x.key;
         }
 
-        public K floor(K key) { // key보다 작거나 같은 키들 중에서 제일 큰 키
+        public K floor(K key) {
             if (root == null || key == null) return null;
             Node<K,V> x = floor(root, key);
             if (x == null) return null;
@@ -149,48 +146,67 @@ public class HW2
         private Node<K,V> floor(Node<K,V> x, K key) {
             if (x == null) return null;
             int cmp = key.compareTo(x.key);
-            if (cmp == 0) return x; // key와 동일한 키를 가진 노드
-            if (cmp < 0) return floor(x.left, key); // key보다 크다면 계속 왼쪽으로
-            Node<K,V> t = floor(x.right, key); // key가 클 경우, 오른쪽으로
-            if (t != null) return t; // 오른쪽에 작은 키가 있을 경우
-            else return x; // 오른쪽에 작은 키가 없을 경우
+            if (cmp == 0) return x;
+            if (cmp < 0) return floor(x.left, key);
+            Node<K,V> t = floor(x.right, key);
+            if (t != null) return t;
+            else return x;
         }
 
         private int size(Node<K,V> x) { return (x != null) ? x.N : 0; }
 
-        public int size(K lo, K hi) {}
+        public int size(K lo, K hi) {
+            if (lo == null || hi == null) return 0;
+            if (hi.compareTo(lo) < 0) return 0;
+            if (contains(hi)) return rank(hi) - rank(lo) + 1;
+            else return rank(hi) - rank(lo);
+        }
 
-        public K ceiling(K key) { … }
+        public K ceiling(K key) {
+            if (root == null || key == null) return null;
+            Node<K,V> x = ceiling(root, key);
+            return (x != null) ? x.key : null;
+        }
 
-        public K select(int rank) { // rank 등수에 해당하는 키를 반환
+        private Node<K,V> ceiling(Node<K,V> x, K key) {
+            if (x == null) return null;
+            int cmp = key.compareTo(x.key);
+            if (cmp == 0) return x;
+            if (cmp > 0) return ceiling(x.right, key);
+            Node<K,V> t = ceiling(x.left, key);
+            return (t != null) ? t : x;
+        }
+
+
+        public K select(int rank) {
             if (root == null || rank < 0 || rank >= size())
                 return null;
             Node<K,V> x = root;
                 while (true) {
                 int t = size(x.left);
-                if (rank < t) // 왼쪽 subtree의 노드 수가 rank보다 크면
-                    x = x.left; // rank 등수의 키는 당연히 왼쪽 subtree에 있겠지
-                else if (rank > t) { // rank가 왼쪽 subtree의 노드 수 밖이면
-                    rank = rank - t - 1; // 왼쪽 subtree와 부모 노드는 결과에서 제외하고
-                    x = x.right; // 오른쪽 subtree를 조사하자
+                if (rank < t)
+                    x = x.left;
+                else if (rank > t) {
+                    rank = rank - t - 1;
+                    x = x.right;
                 }
-                else // 왼쪽 subtree의 수와 rank가 일치하면
-                return x.key; // 부모 노드의 키를 반환 (rank의 시작은 0)
+                else
+                    return x.key;
             }
         }
 
-        public int rank(K key) { // key보다 작은 키의 수
+        public int rank(K key) {
             if (root == null || key == null) return 0;
                 Node<K,V> x = root;
                 int num = 0;
-            while (x != null) { // 루트부터 비교하면서 key보다 작은 키의 수를 합산
+            while (x != null) {
                     int cmp = key.compareTo(x.key);
                 if (cmp < 0) x = x.left;
-                else if (cmp > 0) { // key보다 작은 키를 갖는 노드를 발견
-                    num += 1 + size(x.left); // 왼쪽 subtree의 노드 수를 합산
-                    x = x.right; // 오른쪽 subtree도 계속 검사
+                else if (cmp > 0) {
+                    num += 1 + size(x.left);
+                    x = x.right;
                 }
-                else { // key값을 갖는 노드: 왼쪽 subtree만 합산
+                else {
                     num += size(x.left); break;
                 }
             }
@@ -200,7 +216,22 @@ public class HW2
         public void deleteMin() { delete(min()); }
         public void deleteMax() { delete(max()); }
         
-        public Iterable<K> keys(K lo, K hi) { … }
+        public Iterable<K> keys(K lo, K hi) {
+            ArrayList<K> list = new ArrayList<>();
+            keys(root, list, lo, hi);
+            return list;
+        }
+
+        private void keys(Node<K,V> x, ArrayList<K> list, K lo, K hi) {
+            if (x == null) return;
+            int cmpLo = lo.compareTo(x.key);
+            int cmpHi = hi.compareTo(x.key);
+
+            if (cmpLo < 0) keys(x.left, list, lo, hi);
+            if (cmpLo <= 0 && cmpHi >= 0) list.add(x.key);
+            if (cmpHi > 0) keys(x.right, list, lo, hi);
+        }
+
     }
 
     public void readFile_and_makeBST(BST bst, String fname){
